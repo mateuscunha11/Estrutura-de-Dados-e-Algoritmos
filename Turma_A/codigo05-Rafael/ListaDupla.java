@@ -16,7 +16,7 @@ public class ListaDupla<T>{
     }
 
     public void addInicio(T dado){
-        NoDuplo<T> novoNo = new  NoDuplo<String>(dado);
+        NoDuplo<T> novoNo = new NoDuplo<T>(dado);
 
         if(primeiroNo == null){
             primeiroNo = novoNo;
@@ -28,5 +28,81 @@ public class ListaDupla<T>{
         }
         atualizaIndice();
         tamanho++;
+    }
+
+    public T removeInicio(){
+        if(primeiroNo == null){
+            System.out.println("Lista Vazia!");
+            return null;
+        }else{
+            T dadoTemp = primeiroNo.getDado();
+            primeiroNo = primeiroNo.getProximoNo();
+
+            if(primeiroNo != null){
+                primeiroNo.setAnteriorNo(null);
+            }else{
+                ultimoNo = null;
+            }
+            atualizaIndice();
+            tamanho--;
+            return dadoTemp;
+        }
+    }
+
+    public T removeFinal(){
+        if(primeiroNo == null){
+            System.out.println("Lista Vazia!");
+            return null;
+        }else{
+            T dadoTemp = ultimoNo.getDado();
+            ultimoNo = ultimoNo.getAnteriorNo();
+            if(ultimoNo != null){
+                ultimoNo.setProximoNo(null);
+            }else{
+                primeiroNo = null;
+            }
+            tamanho--;
+            return dadoTemp;
+        }
+    }
+
+    public void addFinal(T dado){
+        NoDuplo<T> novoNo = new NoDuplo<T>(dado);
+        if(primeiroNo == null){
+            primeiroNo = novoNo;
+            ultimoNo = novoNo;
+        }else{
+            novoNo.setAnteriorNo(ultimoNo);
+            ultimoNo.setProximoNo(novoNo);
+            ultimoNo = novoNo;
+        }
+        ultimoNo.setIndice(tamanho);        
+        //novoNo.setIndice(tamanho);
+        //atualizaIndice();
+        tamanho++;
+    }
+
+    public void imprimeLista(){
+        if(primeiroNo == null){
+            System.out.println("Lista Vazia!");
+        }else{
+            System.out.println("Dados da Lista: " + nomeLista);
+            NoDuplo<T> aux = primeiroNo;
+            while (aux != null) { 
+                System.out.printf("%s ", aux.toString());
+                aux = aux.getProximoNo();
+            }
+            System.out.println();
+        }
+    }
+
+    public void atualizaIndice(){
+        NoDuplo<T> atual = primeiroNo;
+        int indice = 0;
+        while (atual != null) { 
+            atual.setIndice(indice);
+            atual = atual.getProximoNo();
+            indice++;
+        }
     }
 }

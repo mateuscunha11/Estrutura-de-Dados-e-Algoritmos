@@ -1,7 +1,6 @@
 public class Principal{
     public static void main(String[] args) {
-        
-
+/*
         NoDuplo<String> no1 = new NoDuplo<String>("Rafael");
         NoDuplo<String> no2 = new NoDuplo<String>("Cecília");
         NoDuplo<String> no3 = new NoDuplo<String>("Joaquim");
@@ -21,5 +20,13 @@ public class Principal{
 */        
 
         ListaDupla<String> lista = new ListaDupla<String>("Alunos");
+        lista.addInicio("Rafael");
+        lista.addInicio("Cecília");
+        lista.addFinal("Joaquim");
+        lista.imprimeLista();
+        System.out.println("Dado: " + lista.removeInicio() + " removido!");
+        lista.imprimeLista();
+        System.out.println("Dado: " + lista.removeFinal() + " removido!");
+        lista.imprimeLista();
     }
 }
